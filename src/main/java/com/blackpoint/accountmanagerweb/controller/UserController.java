@@ -1,7 +1,7 @@
 package com.blackpoint.accountmanagerweb.controller;
 
 import com.blackpoint.accountmanagerweb.model.User;
-import com.blackpoint.accountmanagerweb.model.UserCreationRequest;
+import com.blackpoint.accountmanagerweb.model.requests.UserCreationRequest;
 import com.blackpoint.accountmanagerweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class UserController {
