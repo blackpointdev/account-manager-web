@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,7 +28,6 @@ public class UserController {
 
     @PostMapping("/users")
     public User addUser(@Valid @RequestBody UserCreationRequest userCreationRequest) {
-
         User user = new User();
         user.setUsername(userCreationRequest.getUsername());
         user.setEmail(userCreationRequest.getEmail());
@@ -39,4 +35,7 @@ public class UserController {
 
         return userRepository.save(user);
     }
+
+    @GetMapping("/users/{username}")
+    public User getUserByUsername(@PathVariable String username) { return userRepository.findByUsername(username); }
 }
