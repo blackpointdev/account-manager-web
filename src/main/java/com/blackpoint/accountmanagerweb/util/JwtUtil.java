@@ -14,10 +14,15 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    private String SECRET_KEY = "lNfTXIS9219rL2nR776j9O5ZQmavWJKvqZGQXkdM9iDmbWow9pTfsW3lzSM92Ec"; //TODO Add JWT key
+    private String SECRET_KEY = "lNfTXIS9219rL2nR776j9O5ZQmavWJKvqZGQXkdM9iDmbWow9pTfsW3lzSM92Ec"; //TODO Put key in separate file
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        try {
+            return extractClaim(token, Claims::getSubject);
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     public Date extractExpiration(String token) {
