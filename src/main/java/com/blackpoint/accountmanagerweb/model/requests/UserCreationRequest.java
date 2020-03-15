@@ -1,4 +1,4 @@
-package com.blackpoint.accountmanagerweb.model;
+package com.blackpoint.accountmanagerweb.model.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

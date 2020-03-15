@@ -1,6 +1,6 @@
 package com.blackpoint.accountmanagerweb.controller;
 
-import com.blackpoint.accountmanagerweb.model.AuthenticationRequest;
+import com.blackpoint.accountmanagerweb.model.requests.AuthenticationRequest;
 import com.blackpoint.accountmanagerweb.model.AuthenticationResponse;
 import com.blackpoint.accountmanagerweb.service.MyUserDetailsService;
 import com.blackpoint.accountmanagerweb.util.JwtUtil;
