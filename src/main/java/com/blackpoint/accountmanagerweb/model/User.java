@@ -31,8 +31,4 @@ public class User extends BaseEntity {
 
     @NotBlank
     private String hashedPassword;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Operation> operations;
-
 }

@@ -1,5 +1,6 @@
 package com.blackpoint.accountmanagerweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,10 +16,10 @@ public class Operation {
 
     private String name;
 
-    @NotBlank
     private double balance;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 }

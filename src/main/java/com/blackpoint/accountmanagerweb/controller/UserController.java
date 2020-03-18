@@ -4,12 +4,12 @@ import com.blackpoint.accountmanagerweb.model.User;
 import com.blackpoint.accountmanagerweb.model.requests.UserCreationRequest;
 import com.blackpoint.accountmanagerweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -21,8 +21,8 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
-    public Page<User> getUsers(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @PostMapping("/users")
