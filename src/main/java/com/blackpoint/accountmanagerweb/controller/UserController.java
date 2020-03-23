@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired //TODO Maybe change to some kind of constructor injection?
