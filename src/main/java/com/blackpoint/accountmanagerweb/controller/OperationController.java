@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class OperationController {
 
     @Autowired
