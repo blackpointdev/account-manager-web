@@ -3,6 +3,7 @@ package com.blackpoint.accountmanagerweb.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,8 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    private String SECRET_KEY = "lNfTXIS9219rL2nR776j9O5ZQmavWJKvqZGQXkdM9iDmbWow9pTfsW3lzSM92Ec"; //TODO Put key in separate file
+    @Value("${custom.jwt_key}")
+    private String SECRET_KEY;
 
     public String extractUsername(String token) {
         try {
