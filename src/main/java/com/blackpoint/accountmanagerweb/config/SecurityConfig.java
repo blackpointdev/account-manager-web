@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests().antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/*").permitAll()
-                .anyRequest().permitAll() // TODO CHANGE THIS RIGHT NOW!
+                .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
