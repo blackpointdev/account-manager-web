@@ -3,6 +3,7 @@ package com.blackpoint.accountmanagerweb.controller;
 import com.blackpoint.accountmanagerweb.exception.ResourceNotFoundException;
 import com.blackpoint.accountmanagerweb.model.Operation;
 import com.blackpoint.accountmanagerweb.model.User;
+import com.blackpoint.accountmanagerweb.model.dtos.OperationDto;
 import com.blackpoint.accountmanagerweb.repository.OperationRepository;
 
 import com.blackpoint.accountmanagerweb.repository.UserRepository;
@@ -26,8 +27,8 @@ public class OperationController {
     private UserRepository userRepository;
 
     @GetMapping("/operations")
-    public Page<Operation> getAllOperations(Pageable pageable) {
-        return operationRepository.findAll(pageable);
+    public Page<OperationDto> getAllOperations(Pageable pageable) {
+        return operationRepository.findAllDto(pageable);
     }
 
     @GetMapping("/operations/{operationId}")
