@@ -69,12 +69,13 @@ public class OperationController {
     }
 
     @DeleteMapping("/operations/{operationId}")
-    public ResponseEntity<?> deleteOperation(@PathVariable Long operationId) {
+    public ResponseEntity deleteOperation(@PathVariable Long operationId) {
         Optional<Operation> optionalOperation = operationRepository.findById(operationId);
+        if (!optionalOperation.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
 
-        return optionalOperation.map(operation -> {
-            operationRepository.delete(operation);
-            return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Operation not found with id: " + operationId));
+        operationRepository.delete(optionalOperation.get());
+        return ResponseEntity.ok().build();
     }
 }
