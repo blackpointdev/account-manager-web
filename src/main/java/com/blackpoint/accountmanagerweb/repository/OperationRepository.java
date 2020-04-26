@@ -13,6 +13,13 @@ import org.springframework.stereotype.Repository;
 public interface OperationRepository extends PagingAndSortingRepository<Operation, Long> {
     Page<Operation> findByUserUsername(String username, Pageable pageable);
 
+
+    /**
+     * Method returns Page of OperationDtos, which contains all of Operation data
+     * with additional name of user who made the operation.
+     * @param pageable
+     * @return Page<OperationDto> containing all of operations id database.
+     */
     @Query(
             "SELECT " +
                 "new com.blackpoint.accountmanagerweb.model.dtos.OperationDto(o.id, o.balance, o.name, o.user.id, o.user.username) " +
