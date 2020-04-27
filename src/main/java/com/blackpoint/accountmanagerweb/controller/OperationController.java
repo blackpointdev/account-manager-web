@@ -3,6 +3,7 @@ package com.blackpoint.accountmanagerweb.controller;
 import com.blackpoint.accountmanagerweb.exception.ResourceNotFoundException;
 import com.blackpoint.accountmanagerweb.model.Operation;
 import com.blackpoint.accountmanagerweb.model.User;
+import com.blackpoint.accountmanagerweb.model.dtos.BalanceDto;
 import com.blackpoint.accountmanagerweb.model.dtos.OperationDto;
 import com.blackpoint.accountmanagerweb.repository.OperationRepository;
 
@@ -14,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -77,5 +81,23 @@ public class OperationController {
 
         operationRepository.delete(optionalOperation.get());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/operations/balance")
+    BalanceDto getBalance() {
+        BalanceDto balanceDto = new BalanceDto();
+        BigDecimal balanceValue = BigDecimal.ZERO;
+        Iterable<Operation> operations = operationRepository.findAll();
+
+        Long i = 0L;
+        for (Operation operation: operations) {
+            balanceValue = balanceValue.add(BigDecimal.valueOf(operation.getBalance()));
+            i++;
+        }
+
+        balanceDto.setBalance(balanceValue);
+        balanceDto.setNumberOfOperations(i);
+
+        return balanceDto;
     }
 }
