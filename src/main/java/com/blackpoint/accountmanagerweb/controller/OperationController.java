@@ -73,9 +73,9 @@ public class OperationController {
     }
 
     @DeleteMapping("/operations/{operationId}")
-    public ResponseEntity deleteOperation(@PathVariable Long operationId) {
+    public ResponseEntity<?> deleteOperation(@PathVariable Long operationId) {
         Optional<Operation> optionalOperation = operationRepository.findById(operationId);
-        if (!optionalOperation.isPresent()) {
+        if (optionalOperation.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -83,11 +83,30 @@ public class OperationController {
         return ResponseEntity.ok().build();
     }
 
+    //TODO Probably this should be done by db query?
     @GetMapping("/operations/balance")
     BalanceDto getBalance() {
         BalanceDto balanceDto = new BalanceDto();
         BigDecimal balanceValue = BigDecimal.ZERO;
         Iterable<Operation> operations = operationRepository.findAll();
+
+        Long i = 0L;
+        for (Operation operation: operations) {
+            balanceValue = balanceValue.add(BigDecimal.valueOf(operation.getBalance()));
+            i++;
+        }
+
+        balanceDto.setBalance(balanceValue);
+        balanceDto.setNumberOfOperations(i);
+
+        return balanceDto;
+    }
+
+    @GetMapping("/operations/balance/{username}")
+    BalanceDto getBalance(@PathVariable String username) {
+        BalanceDto balanceDto = new BalanceDto();
+        BigDecimal balanceValue = BigDecimal.ZERO;
+        Iterable<Operation> operations = operationRepository.findByUserUsername(username);
 
         Long i = 0L;
         for (Operation operation: operations) {

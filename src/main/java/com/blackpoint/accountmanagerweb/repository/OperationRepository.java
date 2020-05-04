@@ -8,10 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface OperationRepository extends PagingAndSortingRepository<Operation, Long> {
     Page<Operation> findByUserUsername(String username, Pageable pageable);
+    List<Operation> findByUserUsername(String username);
 
 
     /**
