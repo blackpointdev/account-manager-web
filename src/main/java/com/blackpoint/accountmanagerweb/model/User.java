@@ -1,17 +1,18 @@
 package com.blackpoint.accountmanagerweb.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
-@Data
-@EqualsAndHashCode(exclude = "operations", callSuper = false)
-
+@SuppressWarnings("serial")
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
